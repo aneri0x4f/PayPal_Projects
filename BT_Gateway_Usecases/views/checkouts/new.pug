@@ -1,0 +1,83 @@
+extends ../layout
+
+block content
+  .wrapper: .checkout.container: .content
+    header
+      h1 Hi, #[br] Let's test a transaction
+      p Make a test payment with Braintree using PayPal or a card
+    //- PP with dropin
+    script(src='https://www.paypal.com/sdk/js?client-id=AfmP_Jzao4tPRb-nMDg4R5Y0eEaM9wYNaktzbEqFzH7d2kk4ykYXDIDyJ0v6mSkMJXfvl3ik27V-zNSn')
+    div#paypal-button
+    //- PP with dropin end
+    
+    form#payment-form(action="/checkouts", method="post")
+      section
+        label(for="amount")
+          span.input-label Amount
+          .input-wrapper.amount-wrapper
+            input#amount(name="amount" type="tel" min="1" value="11")
+
+        .bt-drop-in-wrapper
+          #bt-dropin
+
+      input#nonce(type="hidden" name="payment_method_nonce")
+      button.button(type="submit")
+        span Test Transaction
+      script(src='https://js.braintreegateway.com/web/dropin/1.43.0/js/dropin.min.js'
+        data-braintree-dropin-authorization='CLIENT_AUTHORIZATION'
+        data-locale='de_DE'
+        data-payment-option-priority='["paypal","card","paypalCredit","payLater"]'
+        data-paypal.flow='checkout'
+        data-paypal.amount='100.00'
+        data-paypal.currency='USD'
+        data-paypal-credit.flow='vault')
+
+
+
+      // Container for modals in a single line
+      .modal-container(style="display: flex; justify-content: space-between; margin-top: 20px;")
+
+        // Modal for Settle
+        .modal-dialog(style="flex: 1; max-width: 30%; min-width: 200px; border: 1px solid #ddd; border-radius: 5px; margin-right: 10px;")
+          .modal-content
+            .modal-header(style="background-color: #f5f5f5; padding: 10px;")
+              h4 Settle
+            .modal-body(style="padding: 15px;")
+              form(method='POST' action='/settle')
+                .form-group
+                  label(for='tid') Transaction ID:
+                  input#tid.form-control(type='text', placeholder='settle-this-id', name='tid')
+                button.btn.btn-primary(type='submit', name='Settle') Settle
+
+        // Modal for Void
+        .modal-dialog(style="flex: 1; max-width: 30%; min-width: 200px; border: 1px solid #ddd; border-radius: 5px; margin-right: 10px;")
+          .modal-content
+            .modal-header(style="background-color: #f5f5f5; padding: 10px;")
+              h4 Void
+            .modal-body(style="padding: 15px;")
+              form(method='POST' action='/void')
+                .form-group
+                  label(for='tid') Transaction ID:
+                  input#tid.form-control(type='text', placeholder='void-this-id', name='tid')
+                button.btn.btn-primary(type='submit', name='Void') Void
+
+        // Modal for Refund
+        .modal-dialog(style="flex: 1; max-width: 30%; min-width: 200px; border: 1px solid #ddd; border-radius: 5px;")
+          .modal-content
+            .modal-header(style="background-color: #f5f5f5; padding: 10px;")
+              h4 Refund
+            .modal-body(style="padding: 15px;")
+              form(role='form' method='POST' action='/refund')
+                .form-group
+                  label(for='tid') Transaction ID:
+                  input#tid.form-control(type='text', placeholder='refund-this-id', name='tid')
+                .form-group
+                  label(for='amt') Amount:
+                  input#amt.form-control(type='text', placeholder='10.00', name='amt')
+                button.btn.btn-primary(type='submit', name='Refund') Refund
+
+
+    span(hidden id="client-token")=clientToken
+    // Scripts
+    //- script(src="https://js.braintreegateway.com/web/dropin/1.41.0/js/dropin.min.js")
+    script(type="text/javascript", src="/javascript/demo.js")

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Braintree Drop-in UI</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://js.braintreegateway.com/web/dropin/1.43.0/js/dropin.min.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <div>
+        <h1>Braintree Dropin UI</h1>
+        <img
+          src="https://i5.walmartimages.com/seo/Womens-Running-Shoes-Non-Slip-Walking-Tennis-Blade-Type-Fashion-Sneakers_59e66e05-f303-4ac3-92ba-62d864678295.b1a5a53a20206820b4509c775029ff6c.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF"
+          alt="Product Image"
+          width="300px"
+        />
+      </div>
+    </div>
+    <div id="dropin-container"></div>
+    <!-- <button id="submit-button">Request Payment Method</button> -->
+    <script>
+      var button = document.querySelector("#submit-button");
+
+      braintree.dropin.create(
+        {
+          authorization: "CLIENT_AUTHORIZATION",
+          container: "#dropin-container",
+        },
+        function (createErr, instance) {
+          if (createErr) {
+            console.error(createErr);
+            return;
+          }
+
+          button.addEventListener("click", function () {
+            instance.requestPaymentMethod(function (
+              requestPaymentMethodErr,
+              payload
+            ) {
+              if (requestPaymentMethodErr) {
+                console.error(requestPaymentMethodErr);
+                return;
+              }
+              // Submit payload.nonce to your server
+              console.log("Payment Method Nonce:", payload.nonce);
+            });
+          });
+        }
+      );
+    </script>
+    <script src="client.js"></script>
+  </body>
+</html>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+  />
+
+  <script src="https://js.braintreegateway.com/web/dropin/1.20.4/js/dropin.min.js"></script>
+</head>

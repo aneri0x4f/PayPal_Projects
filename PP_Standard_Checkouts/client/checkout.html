@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayPal JS SDK Standard Integration</title>
+    <style>
+      body,
+      html {
+        margin: 30px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 700px;
+        width: 100%;
+      }
+      img {
+        width: 100%;
+        max-width: 700px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+      #paypal-button-container {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Standard Checkout</h2>
+      <p>$10.00 USD Standard checkout</p>
+      <div id="content">
+        <div>
+          <img
+            src="https://www.tbstat.com/wp/uploads/2021/08/bayc2.jpg"
+            alt="Product Image"
+          />
+        </div>
+      </div>
+      <div id="paypal-button-container"></div>
+      <p id="result-message"></p>
+    </div>
+    <!-- Replace the "test" client-id value with your client-id o ryou can keep it test(lowercase)-->
+    <script src="https://www.paypal.com/sdk/js?client-id=test&components=buttons&enable-funding=venmo,paylater"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

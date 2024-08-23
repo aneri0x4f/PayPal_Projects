@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title BraintreeExpressExample
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/stylesheets/app.css")
+    link(rel="stylesheet", href="/stylesheets/overrides.css")
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    //- link(rel='stylesheet', href='/styles.css') // Optional custom styles
+  body
+    header.main
+      .container.wide
+        .content.slim
+          .set
+            .fill
+              a.pseudoshop(href='/') PSEUDO #[strong SHOP]
+            .fit
+              a.braintree(href='https://developers.braintreepayments.com/guides/drop-in', target='_blank') Braintree
+
+      .notice-wrapper
+        if messages && messages.length > 0
+          .show.notice.error.notice-error
+            for msg in messages
+              span.notice-message= msg.msg
+
+    block content
+
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+    script(src='/scripts.js') // Optional custom scripts
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout</title>
+    <script src="https://js.braintreegateway.com/web/3.103.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.103.0/js/hosted-fields.min.js"></script>
+    <!-- PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AfmP_Jzao4tPRb-nMDg4R5Y0eEaM9wYNaktzbEqFzH7d2kk4ykYXDIDyJ0v6mSkMJXfvl3ik27V-zNSn"></script>
+    <script src="https://js.braintreegateway.com/web/3.103.0/js/paypal-checkout.min.js"></script>
+    <!-- Venmo -->
+    <script src="https://js.braintreegateway.com/web/3.103.0/js/venmo.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.103.0/js/data-collector.min.js"></script>
+    <!-- Google Pay -->
+    <script src="https://js.braintreegateway.com/web/3.103.0/js/google-payment.min.js"></script>
+    <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+    <script
+      src="http://code.jquery.com/jquery-3.2.1.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <form action="/" id="my-sample-form" method="post">
+      <label for="card-number">Card Number</label>
+      <div id="card-number"></div>
+      <label for="cvv">CVV</label>
+      <div id="cvv"></div>
+      <label for="expiration-date">Expiration Date</label>
+      <div id="expiration-date"></div>
+      <input type="submit" value="Pay" disabled />
+    </form>
+    <div id="paypal-button"></div>
+    <div id="venmo-button">
+      <input
+        type="image"
+        id="venmoButton"
+        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/850290/blue_venmo_button_active_320x48.svg"
+      />
+    </div>
+    <div id="google-pay-button">
+      <input
+        type="image"
+        id="googlePayButton"
+        src="https://developers.google.com/static/pay/api/images/brand-guidelines/buy-button-white-pill-shape.png"
+        width="300px"
+      />
+    </div>
+    <script src="client.js"></script>
+  </body>
+</html>
